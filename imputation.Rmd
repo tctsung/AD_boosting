@@ -47,7 +47,7 @@ bwplot(imp, layout = c(3, 1))
 stripplot(imp, pch = c(21, 20), cex = c(1, 1.5), layout = c(3, 1))
 # export:
 train_imp <- complete(imp, m=5)[[1]]
-write.csv(train_imp, file = "../clean_data/mci_wv1go_imp.csv")
+write.csv(train_imp, file = "../clean_data/mci_wv1go_imp.csv", row.names=FALSE)
 ```
 
 
@@ -64,6 +64,15 @@ bwplot(imp, layout = c(3, 1))
 stripplot(imp, pch = c(21, 20), cex = c(1, 1.5), layout = c(3, 1))
 # export:
 test_imp <- complete(imp, m=5)[[1]]
-write.csv(test_imp, file = "../clean_data/mci_wv23_imp.csv")
+write.csv(test_imp, file = "../clean_data/mci_wv23_imp.csv", row.names=FALSE)
+```
+
+```{r}
+train_imp = read.csv("../clean_data/mci_wv1go_imp.csv")
+test_imp = read.csv("../clean_data/mci_wv23_imp.csv")
+sum(is.na(test_imp))
+sum(is.na(train_imp))
+colSums(is.na(test_imp))  
+colSums(is.na(train_imp))
 ```
 
