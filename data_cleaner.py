@@ -11,7 +11,7 @@ class Cleaner:
 		assert isinstance(df, pd.DataFrame), "Input data must be a pandas DataFrame."
 		self.df = df
 	# def __repr__
-	def rm_na_cols(self, na_percentage):
+	def rm_na_cols(self, na_percentage=1):
 		assert 0 <= na_percentage <= 1, "na_percentage must be between 0 and 1"
 		cnt = int(self.df.shape[0] * na_percentage)
 		self.df.dropna(thresh = cnt, axis=1, inplace=True)

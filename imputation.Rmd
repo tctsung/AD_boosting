@@ -12,8 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r message=FALSE, warning=FALSE}
 library(mice)
 library(tidyverse)
-train <- read.csv("../clean_data/mci_wv1go.csv")
-test <- read.csv("../clean_data/mci_wv23.csv")
+train <- read.csv("../clean_data/mci_wv1go_aug.csv")
+test <- read.csv("../clean_data/mci_wv23_aug.csv")
 ```
 
 ### Visualization
@@ -46,8 +46,11 @@ imp = mice(train, seed=1, m=5, maxit=5, pred=pred, printFlag = F, ridge=0.001)
 bwplot(imp, layout = c(3, 1))
 stripplot(imp, pch = c(21, 20), cex = c(1, 1.5), layout = c(3, 1))
 # export:
-train_imp <- complete(imp, m=5)[[1]]
-write.csv(train_imp, file = "../clean_data/mci_wv1go_imp.csv", row.names=FALSE)
+for (i in 1:5){
+  fl <- complete(imp, m=i)[[1]]
+  fl_name <- paste0("../clean_data/impute/train", i, ".csv")
+  write.csv(fl, file = fl_name, row.names=FALSE)
+}
 ```
 
 
@@ -63,16 +66,18 @@ imp = mice(test, seed=1, m=5, maxit=5, pred=pred, printFlag = F, ridge=0.001)
 bwplot(imp, layout = c(3, 1))
 stripplot(imp, pch = c(21, 20), cex = c(1, 1.5), layout = c(3, 1))
 # export:
-test_imp <- complete(imp, m=5)[[1]]
-write.csv(test_imp, file = "../clean_data/mci_wv23_imp.csv", row.names=FALSE)
+for (i in 1:5){
+  fl <- complete(imp, m=i)[[1]]
+  fl_name <- paste0("../clean_data/impute/test", i, ".csv")
+  write.csv(fl, file = fl_name, row.names=FALSE)
+}
 ```
 
 ```{r}
-train_imp = read.csv("../clean_data/mci_wv1go_imp.csv")
-test_imp = read.csv("../clean_data/mci_wv23_imp.csv")
-sum(is.na(test_imp))
-sum(is.na(train_imp))
-colSums(is.na(test_imp))  
-colSums(is.na(train_imp))
+pred = quickpred(train)
+imp = mice(train, seed=1, m=1, maxit=1, pred=pred, printFlag = F, ridge=0.001)  
+check_na = complete(imp, m=3)[[1]]
+sum(is.na(check_na))
+colSums(is.na(check_na))  
 ```
 

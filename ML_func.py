@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 
 def vote_hyperparam(cv_results_, top_n=5):
@@ -16,3 +16,19 @@ def vote_hyperparam(cv_results_, top_n=5):
 	output.columns = output.columns.str.replace("param_","")  # to match param nm for dict
 	output = output.to_dict('records')[0]  # turn to dict
 	return output
+
+def plt_learning_curve(train_loss, test_loss):
+	"""
+	TODO: plot learning curves
+	:param train_loss, test_loss: list
+	"""
+    fig, ax = plt.subplots()
+    ax.plot(train_loss, label='Training Error')
+    ax.plot(test_loss, label='Testing Error')
+    ax.set_title('Learning Curve')
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('Loss')
+    ax.legend()
+    plt.show()
+
+
