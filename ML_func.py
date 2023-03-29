@@ -22,13 +22,19 @@ def plt_learning_curve(train_loss, test_loss):
 	TODO: plot learning curves
 	:param train_loss, test_loss: list
 	"""
-    fig, ax = plt.subplots()
-    ax.plot(train_loss, label='Training Error')
-    ax.plot(test_loss, label='Testing Error')
-    ax.set_title('Learning Curve')
-    ax.set_xlabel('Epoch')
-    ax.set_ylabel('Loss')
-    ax.legend()
-    plt.show()
+	fig, ax = plt.subplots()
+	ax.plot(train_loss, label='Training Error')
+	ax.plot(test_loss, label='Testing Error')
+	ax.set_title('Learning Curve')
+	ax.set_xlabel('Epoch')
+	ax.set_ylabel('Loss')
+	ax.legend()
+	plt.show()
+	# def catboost_train():
+
+
+
+
+
 
 
