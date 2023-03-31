@@ -1,0 +1,12 @@
+Rank,XGBoost,XGBoost,Light GBM,Light GBM,CatBoost,CatBoost
+,Feature,normalized Score,Feature,normalized Score,Feature,Score
+1,PTAU,1.3333,PTAU,0.8462,FAQ,13.1171
+2,MidTemp,0.9048,FAQ,0.6154,PTAU,6.5309
+3,TAU,0.8571,AGE,0.5641,CDRSB,6.4008
+4,FAQ,0.8095,RAVLT_immediate,0.5128,MidTemp,4.9989
+5,AGE,0.7619,MidTemp,0.4872,RAVLT_immediate,4.7751
+6,RAVLT_immediate,0.7619,TAU,0.4103,LDELTOTAL,4.1974
+7,Ventricles,0.6667,EcogSPLang,0.3590,ADAS13,4.1349
+8,EcogSPLang,0.6190,CDRSB,0.3077,EcogSPLang,3.6556
+9,EcogSPTotal,0.6190,LDELTOTAL,0.3077,Hippocampus,3.4510
+10,IMAGEUID,0.6190,AV45,0.2821,mPACCdigit,3.2334

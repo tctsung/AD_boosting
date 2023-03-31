@@ -12,8 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r message=FALSE, warning=FALSE}
 library(mice)
 library(tidyverse)
-train <- read.csv("../clean_data/mci_wv1go_aug.csv")
-test <- read.csv("../clean_data/mci_wv23_aug.csv")
+train <- read.csv("../../clean_data/mci_wv1go_aug.csv")
+test <- read.csv("../../clean_data/mci_wv23_aug.csv")
 ```
 
 ### Visualization
@@ -47,8 +47,8 @@ bwplot(imp, layout = c(3, 1))
 stripplot(imp, pch = c(21, 20), cex = c(1, 1.5), layout = c(3, 1))
 # export:
 for (i in 1:5){
-  fl <- complete(imp, m=i)[[1]]
-  fl_name <- paste0("../clean_data/impute/train", i, ".csv")
+  fl <- complete(imp, i)
+  fl_name <- paste0("../../clean_data/impute/train", i, ".csv")
   write.csv(fl, file = fl_name, row.names=FALSE)
 }
 ```
@@ -67,8 +67,8 @@ bwplot(imp, layout = c(3, 1))
 stripplot(imp, pch = c(21, 20), cex = c(1, 1.5), layout = c(3, 1))
 # export:
 for (i in 1:5){
-  fl <- complete(imp, m=i)[[1]]
-  fl_name <- paste0("../clean_data/impute/test", i, ".csv")
+  fl <- complete(imp, i)
+  fl_name <- paste0("../../clean_data/impute/test", i, ".csv")
   write.csv(fl, file = fl_name, row.names=FALSE)
 }
 ```
