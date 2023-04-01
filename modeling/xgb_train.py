@@ -28,14 +28,14 @@ def xgboost_greedy(data, label, params, fold=5, seed=111):
                                 )
     model_greedy.fit(data, label) 
     output = pd.DataFrame(model_greedy.cv_results_).sort_values("rank_test_score")
-    display(output.head(10))
+    print(output.head(10))
     return output
 def main():  
 	# inputs:
 	# data = load_py('../../clean_data/train1.pkl')
 	data = load_py("train1_dummy.pkl")
 	x = data.copy()
-	y = data.pop('progress')
+	y = x.pop('progress')
 	# hyperparams:
 	params = {
 	    'n_estimators':[100,300,1000],

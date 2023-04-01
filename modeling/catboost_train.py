@@ -22,7 +22,7 @@ def save_py(obj, location):
 	savefile.close()
 def catboost_greedy(data, label, params, cat_features, fold=5, seed=111):
 	model = cat.CatBoostClassifier(cat_features=cat_features, random_seed=seed, 
-									 early_stopping_rounds=100)
+									 verbose=0, early_stopping_rounds=100)
 	model_greedy = GridSearchCV(estimator = model, cv=fold, param_grid=params, verbose=100, 
 								scoring = 'matthews_corrcoef' # outcome imbalanced
 								)
@@ -30,24 +30,20 @@ def catboost_greedy(data, label, params, cat_features, fold=5, seed=111):
 	output = pd.DataFrame(model_greedy.cv_results_).sort_values("rank_test_score")
 	return output
 def main():   # code to run
-	# data = load_py("train1.pkl")
-	data = load_py('../../clean_data/train1.pkl')
+	data = load_py("train1.pkl")
 	x = data.copy()
 	y = x.pop('progress')
 	# inputs:
-	# params = {
-	#     'depth':list(range(3,11)),                       # 6-10 is recommend
-	#     'learning_rate':[0.003,0.006, 0.009,0.03,0.06,0.09,0.3],   # default: 0.03
-	#     'iterations':[100,200,300,500,1000,2000],     # because couldn't apply early stopping
-	#     'l2_leaf_reg':list(map(lambda x:x/2, range(0,13))),  # default 3
-	# }
 	params = {
-		'depth':list(range(3,11))
+	    'depth':list(range(3,11)),                       # 6-10 is recommend
+	    'learning_rate':[0.003,0.006, 0.009,0.03,0.06,0.09,0.3],   # default: 0.03
+	    'iterations':[100,300,500,1000],     # because couldn't apply early stopping
+	    'l2_leaf_reg':list(map(lambda x:x/2, range(0,11))),  # default 3
 	}
 	cat_features = ['PTGENDER', 'PTETHCAT', 'PTMARRY', 'PTRACCAT']
 	# training:
 	output = catboost_greedy(x, y, params, cat_features)
-	save_py(output, "catboost_grid_result_test")
+	save_py(output, "catboost_grid_result")
 
 if __name__ == '__main__':
 	main()
