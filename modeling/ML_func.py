@@ -39,6 +39,8 @@ def plt_learning_curve(train_loss, test_loss):
 	ax.set_title('Learning Curve')
 	ax.set_xlabel('Epoch')
 	ax.set_ylabel('Loss')
+	min_val_loss_idx = test_loss.index(min(test_loss))  # add veritical line with lowest loss
+	ax.axvline(x=min_val_loss_idx, color='r', linestyle='--')
 	ax.legend()
 	plt.show()
 from sklearn.model_selection import GridSearchCV
